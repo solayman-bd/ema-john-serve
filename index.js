@@ -48,8 +48,9 @@ client.connect((err) => {
     });
   });
   app.get("/products", (req, res) => {
+    const search = req.query.search;
     products
-      .find({})
+      .find({ name: { $regex: search } })
 
       .toArray((err, document) => {
         res.send(document);
